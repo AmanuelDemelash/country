@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:country/app/constant/colorConstant.dart';
 import 'package:country/app/data/models/country_model.dart';
@@ -11,7 +10,7 @@ class CountryDetailView extends GetView<CountryDetailController> {
   final Country country = Get.arguments;
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(fontSize: 15,fontWeight: FontWeight.bold);
+    const textStyle = TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
     return Scaffold(
         body: CustomScrollView(
       slivers: [
@@ -31,17 +30,23 @@ class CountryDetailView extends GetView<CountryDetailController> {
           pinned: true,
           snap: true,
           floating: true,
-          expandedHeight: 300,
+          expandedHeight: 200,
           flexibleSpace: FlexibleSpaceBar(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(country.flag.toString()),
-                Expanded(child: Text(country.name!.common!,overflow: TextOverflow.ellipsis,)),
+                Expanded(
+                    child: Text(
+                  country.name!.common!,
+                  overflow: TextOverflow.ellipsis,
+                )),
               ],
             ),
             background: ClipRRect(
-              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20)),
               child: Hero(
                 tag: country,
                 child: CachedNetworkImage(
@@ -58,211 +63,337 @@ class CountryDetailView extends GetView<CountryDetailController> {
           ),
         ),
         SliverList(
-            delegate: SliverChildListDelegate(
-                [
-      //detail info
+            delegate: SliverChildListDelegate([
+          //detail info
           Container(
             width: Get.width,
-            margin:const EdgeInsets.all(15),
+            margin: const EdgeInsets.all(15),
             child: Column(
               children: [
-                const Text("Detail Information",style: textStyle,),
+                const Text(
+                  "Detail Information",
+                  style: textStyle,
+                ),
                 Row(
                   children: [
-                    const Text("Name:  ",style: textStyle,),
+                    const Text(
+                      "Name:  ",
+                      style: textStyle,
+                    ),
                     Text(country.name!.common!),
                   ],
                 ),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Official Name: ",style: textStyle,),
-                    Text(country.name!.official!),
+                    const Text(
+                      "Official Name: ",
+                      style: textStyle,
+                    ),
+                    Expanded(child: Text(country.name!.official!)),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text("Independent: ",style: textStyle,),
+                    const Text(
+                      "Independent: ",
+                      style: textStyle,
+                    ),
                     Text(country.independent.toString()),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text("Status: ",style: textStyle,),
+                    const Text(
+                      "Status: ",
+                      style: textStyle,
+                    ),
                     Text(country.status!.toString()),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text("UnMember: ",style: textStyle,),
+                    const Text(
+                      "UnMember: ",
+                      style: textStyle,
+                    ),
                     Text(country.unMember.toString()),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text("Land Locked: ",style: textStyle,),
+                    const Text(
+                      "Land Locked: ",
+                      style: textStyle,
+                    ),
                     Text(country.landlocked!.toString()),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text("Lat/Lng: ",style: textStyle,),
+                    const Text(
+                      "Population: ",
+                      style: textStyle,
+                    ),
+                    Text(country.population!.toString()),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Lat/Lng: ",
+                      style: textStyle,
+                    ),
                     Text("${country.latlng![0]}/${country.latlng![1]}"),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text("Start of week: ",style: textStyle,),
+                    const Text(
+                      "Start of week: ",
+                      style: textStyle,
+                    ),
                     Text(country.startOfWeek.toString()),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text("Time Zone: ",style: textStyle,),
-                    Expanded(child: Text(country.timezones.toString(),maxLines: 1,overflow: TextOverflow.ellipsis,)),
+                    const Text(
+                      "Time Zone: ",
+                      style: textStyle,
+                    ),
+                    Expanded(
+                        child: Text(
+                      country.timezones.toString(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text("Car Side: ",style: textStyle,),
+                    const Text(
+                      "Car Side: ",
+                      style: textStyle,
+                    ),
                     Text(country.car!.side!.name),
                   ],
                 ),
-              ],
-            ),
-          ),
-      // geography
-          Container(
-            width: Get.width,
-            margin:const EdgeInsets.all(15),
-            child: Column(
-              children: [
-                const Text("Geography",style: textStyle,),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Region: ",style: textStyle,),
-                    Text(country.region!.name),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text("SubRegion: ",style: textStyle,),
-                    Text(country.subregion ?? ""),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text("Capital: ",style: textStyle,),
-                    Text(country.capital![0]),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text("Demonym: ",style: textStyle,),
-                    Text(country.demonyms!.eng!.f!),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text("Area: ",style: textStyle,),
-                    Text("${country.area!}m²"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text("Lat/Lng: ",style: textStyle,),
-                    Text("${country.latlng![0]}/${country.latlng![1]}"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text("Borders: "),
-                   country.borders!=null? Row(children:List.generate(country.borders!.length,(index) => Text("${country.borders![index]} / "),),):Text("")
-                  ],
-                ),
-              ],
-            ),
-          ),
-      //language
-          Container(
-            width: Get.width,
-            margin:const EdgeInsets.all(15),
-            child: Column(
-              children: [
-                const Text("Language",style: textStyle,),
+                    const Text("currencies: ",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:country.languages!.entries.map((entry) {
+                      children: country.currencies!.entries.map((entry) {
                         String languageCode = entry.key.toUpperCase();
-
+                        String name = entry.value.name ?? '';
+                        String symbol = entry.value.symbol ?? '';
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(languageCode,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 16)),
-                              const SizedBox(width: 10,),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Official: ${languageCode}'),
+                                  Text("$name($languageCode)"),
+                                  Text(symbol)
                                   // Text('Common: $commonName'),
-                                ],)
-
+                                ],
+                              )
                             ],
                           ),
                         );
                       }).toList(),
                     ),
-
+                  ],
+                )
               ],
             ),
           ),
-      // translation
+          // geography
           Container(
-                    width: Get.width,
-                    margin:const EdgeInsets.all(15),
-                    child: Column(
-                      children: [
-                        const Text("Translations",style: textStyle,),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:country.translations!.entries.map((entry) {
-                            String languageCode = entry.key.toUpperCase();
-                            String officialName = entry.value.official ?? '';
-                            String commonName = entry.value.common?? '';
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(languageCode,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold, fontSize: 16)),
-                                  const SizedBox(width: 10,),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                      Text('Official: $officialName',overflow: TextOverflow.ellipsis,),
-                                      Text('Common: $commonName'),
-                                    ],),
-                                  )
-
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
-
-                      ],
+            width: Get.width,
+            margin: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                const Text(
+                  "Geography",
+                  style: textStyle,
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Region: ",
+                      style: textStyle,
                     ),
-                  ),
+                    Text(country.region!.name),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "SubRegion: ",
+                      style: textStyle,
+                    ),
+                    Text(country.subregion ?? ""),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Capital: ",
+                      style: textStyle,
+                    ),
+                    Text(country.capital![0]),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Demonym: ",
+                      style: textStyle,
+                    ),
+                    Text(country.demonyms!.eng!.f!),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Area: ",
+                      style: textStyle,
+                    ),
+                    Text("${country.area!}m²"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Lat/Lng: ",
+                      style: textStyle,
+                    ),
+                    Text("${country.latlng![0]}/${country.latlng![1]}"),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Borders: ",
+                      style: textStyle,
+                    ),
+                    country.borders != null
+                        ? Expanded(
+                            child: Wrap(
+                              children: List.generate(
+                                country.borders!.length,
+                                (index) =>
+                                    Text("${country.borders![index]} / "),
+                              ),
+                            ),
+                          )
+                        : const Text("")
+                  ],
+                ),
+              ],
+            ),
+          ),
+          //language
+          Container(
+            width: Get.width,
+            margin: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                const Text(
+                  "Language",
+                  style: textStyle,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: country.languages!.entries.map((entry) {
+                    String languageCode = entry.key.toUpperCase();
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(languageCode,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Official: ${languageCode}'),
+                              // Text('Common: $commonName'),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+          ),
+          // translation
+          Container(
+            width: Get.width,
+            margin: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                const Text(
+                  "Translations",
+                  style: textStyle,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: country.translations!.entries.map((entry) {
+                    String languageCode = entry.key.toUpperCase();
+                    String officialName = entry.value.official ?? '';
+                    String commonName = entry.value.common ?? '';
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(languageCode,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Official: $officialName',
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text('Common: $commonName'),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+          ),
         ]))
       ],
     ));
