@@ -12,7 +12,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       title: "Application",
       initialBinding: AppBinding(),
-      theme: darkTheme,
+       theme: lightTheme,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
