@@ -21,7 +21,7 @@ class HomeView extends GetView<HomeController> {
           SliverAppBar(
             actions: [
               PopupMenuButton(
-                icon: const Icon(Icons.filter_sharp),
+                icon: const Icon(Icons.filter_list),
                 itemBuilder: (context) {
                   return List.generate(
                     controller.regions.length,
