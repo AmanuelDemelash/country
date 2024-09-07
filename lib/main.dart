@@ -2,17 +2,24 @@ import 'package:country/app/bindings/app_bindings.dart';
 import 'package:country/app/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:hive_flutter/adapters.dart';
 import 'app/routes/app_pages.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter(); // Initialize Hive
+  await Hive.openBox('setting');
+  Box sbox = Hive.box('setting');
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "GlobeGuide",
       initialBinding: AppBinding(),
-      theme: lightTheme,
+      theme: sbox.get("isdark") == null
+          ? lightTheme
+          : sbox.get("isdark")
+              ? darkTheme
+              : lightTheme,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
