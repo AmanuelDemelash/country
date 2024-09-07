@@ -33,10 +33,9 @@ class HomeController extends GetxController {
         getRegions();
         loadCountries.value = false;
       } else {
-        loadCountries.value = false;
       }
     } catch (e) {
-      loadCountries.value = false;
+
     }
   }
 
