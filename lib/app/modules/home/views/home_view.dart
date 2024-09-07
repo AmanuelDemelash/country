@@ -174,7 +174,8 @@ class HomeView extends GetView<HomeController> {
                                       key: Key(controller.allCountries
                                           .value[index].name!.common
                                           .toString()),
-                                      tag: controller.allCountries.value[index].name!.common!,
+                                      tag: controller.allCountries.value[index]
+                                          .name!.common!,
                                       child: CachedNetworkImage(
                                         width: 40,
                                         height: 40,
@@ -213,9 +214,9 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
             //favorite
-            FavoriteView(),
+            const FavoriteView(),
             //setting
-            SettingView()
+            const SettingView()
           ],
         ));
   }

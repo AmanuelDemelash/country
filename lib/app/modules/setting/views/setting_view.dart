@@ -1,4 +1,3 @@
-import 'package:country/app/data/models/country_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
