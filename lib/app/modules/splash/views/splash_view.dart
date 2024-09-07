@@ -9,23 +9,22 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     Get.put(SplashController());
-    return  Scaffold(
-      body:SafeArea(
+    return Scaffold(
+      body: SafeArea(
         child: Column(
           children: [
             const Spacer(flex: 2),
             SizedBox(
               width: Get.width,
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl:"https://i.postimg.cc/Qtxc8xgv/welcome-image.png",
-                  placeholder: (context, url) => Icon(
-                    Icons.image,
-                    color: ColorConstant.blueDark_800.withOpacity(0.6),
-                  ),
-                  errorWidget: (context, url, error) =>
-                  const Icon(Icons.error),
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: "https://i.postimg.cc/Qtxc8xgv/welcome-image.png",
+                placeholder: (context, url) => Icon(
+                  Icons.image,
+                  color: ColorConstant.blueDark_800.withOpacity(0.6),
                 ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
             ),
             const Spacer(flex: 3),
             Text(
@@ -49,8 +48,9 @@ class SplashView extends GetView<SplashController> {
               ),
             ),
             const Spacer(flex: 1),
-            Center(child: CircularProgressIndicator(),),
-
+            const Center(
+              child: CircularProgressIndicator(),
+            ),
             const Spacer(),
           ],
         ),
