@@ -1,6 +1,5 @@
 import 'package:country/app/data/models/country_model.dart';
 import 'package:get/get.dart';
-
 import '../../../data/provider/api_provider.dart';
 
 class HomeController extends GetxController {

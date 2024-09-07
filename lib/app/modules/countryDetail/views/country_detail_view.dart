@@ -10,8 +10,9 @@ class CountryDetailView extends GetView<CountryDetailController> {
   CountryDetailView({super.key});
   final Country country = Get.arguments;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     const textStyle = TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
+    controller.checkFavorite(country.name!.common!);
     return Scaffold(
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -48,11 +49,17 @@ class CountryDetailView extends GetView<CountryDetailController> {
                     Icons.arrow_back_ios,
                   )),
               actions: [
-                IconButton(
-                    onPressed: () => Get.back(),
-                    icon: const Icon(
+               Obx(() =>IconButton(
+                    onPressed: (){
+                      if(controller.isFavorite.value){
+                        controller.deleteFavorite(country);
+                      }else{
+                       controller.addFavorite(country);
+                      }
+                    },
+                    icon:controller.isFavorite.value?const Icon(Icons.favorite,color: ColorConstant.blueDark_900,):const Icon(
                       Icons.favorite_border,
-                    )),
+                    )),)
               ],
               pinned: true,
               snap: true,
@@ -217,7 +224,7 @@ class CountryDetailView extends GetView<CountryDetailController> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: country.currencies!.entries.map((entry) {
+                          children:country.currencies!=null? country.currencies!.entries.map((entry) {
                             String languageCode = entry.key.toUpperCase();
                             String name = entry.value.name ?? '';
                             String symbol = entry.value.symbol ?? '';
@@ -240,7 +247,7 @@ class CountryDetailView extends GetView<CountryDetailController> {
                                 ],
                               ),
                             );
-                          }).toList(),
+                          }).toList():[],
                         ),
                       ],
                     )
@@ -287,7 +294,7 @@ class CountryDetailView extends GetView<CountryDetailController> {
                           "Capital: ",
                           style: textStyle,
                         ),
-                        Text(country.capital![0]),
+                        Text(country.capital!=null?country.capital![0]:""),
                       ],
                     ),
                     Row(
@@ -359,7 +366,7 @@ class CountryDetailView extends GetView<CountryDetailController> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: country.languages!.entries.map((entry) {
+                      children:country.languages!=null? country.languages!.entries.map((entry) {
                         String languageCode = entry.key.toUpperCase();
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -377,14 +384,14 @@ class CountryDetailView extends GetView<CountryDetailController> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Official: ${languageCode}'),
+                                  Text('Official: $languageCode'),
                                   // Text('Common: $commonName'),
                                 ],
                               )
                             ],
                           ),
                         );
-                      }).toList(),
+                      }).toList():[],
                     ),
                   ],
                 ),

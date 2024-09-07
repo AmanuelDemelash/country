@@ -9,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter(); // Initialize Hive
   await Hive.openBox('setting');
+  await Hive.openBox('favorite');
   Box sbox = Hive.box('setting');
   runApp(
     GetMaterialApp(
@@ -16,7 +17,7 @@ void main() async {
       title: "GlobeGuide",
       initialBinding: AppBinding(),
       theme: sbox.get("isdark") == null
-          ? lightTheme
+          ? darkTheme
           : sbox.get("isdark")
               ? darkTheme
               : lightTheme,
