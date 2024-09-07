@@ -27,7 +27,10 @@ class HomeController extends GetxController {
       var response = await _apiProvider.getAllCountries();
       if (response!.statusCode == 200) {
         allCountries.value
-            .addAll(countryFromJson(response.bodyString!).toList()); //);
+            .addAll(countryFromJson(response.bodyString!).toList());
+        allCountries.value.sort(
+          (a, b) => a.name!.common!.compareTo(b.name!.common!),
+        );
         getRegions();
         loadCountries.value = false;
       } else {
@@ -45,6 +48,9 @@ class HomeController extends GetxController {
       if (response!.statusCode == 200) {
         searchCountries.value
             .addAll(countryFromJson(response.bodyString!).toList());
+        searchCountries.value.sort(
+          (a, b) => a.name!.common!.compareTo(b.name!.common!),
+        );
         isSearchNmae.value = false;
       }
     } catch (e) {
@@ -60,6 +66,26 @@ class HomeController extends GetxController {
           )
           .toSet()
           .toList());
+    }
+  }
+
+  Future<void> filterCountryByRegion(dynamic value) async {
+    loadCountries.value = true;
+    try {
+      var response = await _apiProvider.countriesByRegion(value.toString());
+      if (response!.statusCode == 200) {
+        allCountries.value.clear();
+        allCountries.value
+            .addAll(countryFromJson(response.bodyString!).toList());
+        allCountries.value.sort(
+          (a, b) => a.name!.common!.compareTo(b.name!.common!),
+        );
+        loadCountries.value = false;
+      } else {
+        loadCountries.value = false;
+      }
+    } catch (e) {
+      loadCountries.value = false;
     }
   }
 }
