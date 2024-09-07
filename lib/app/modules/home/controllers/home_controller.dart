@@ -52,11 +52,13 @@ class HomeController extends GetxController {
   }
 
   Future<void> getRegions() async {
-    regions.addAll(allCountries.value
-        .map(
-          (e) => e.region!.name,
-        )
-        .toSet()
-        .toList());
+    if (regions.isEmpty) {
+      regions.addAll(allCountries.value
+          .map(
+            (e) => e.region!.name,
+          )
+          .toSet()
+          .toList());
+    }
   }
 }

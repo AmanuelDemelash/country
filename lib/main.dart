@@ -10,9 +10,9 @@ void main() {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Application",
+      title: "GlobeGuide",
       initialBinding: AppBinding(),
-       theme: lightTheme,
+      theme: lightTheme,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
