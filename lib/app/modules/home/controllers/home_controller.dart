@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../data/provider/api_provider.dart';
 
 class HomeController extends GetxController {
+  RxInt bottomNavIndex = 0.obs;
   final ApiProvider _apiProvider = Get.find<ApiProvider>();
   Rx<List<Country>> allCountries = RxList<Country>().obs;
   Rx<List<Country>> searchCountries = RxList<Country>().obs;
