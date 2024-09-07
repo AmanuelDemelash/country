@@ -11,7 +11,7 @@ import '../widgets/loading_shimmer.dart';
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
   final SearchController searchController = SearchController();
-  PageController pageController = PageController();
+  final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class HomeView extends GetView<HomeController> {
                       icon: Icon(Icons.settings), label: "Setting")
                 ])),
         body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: pageController,
           children: [
             //home
@@ -43,18 +44,23 @@ class HomeView extends GetView<HomeController> {
                     actions: [
                       PopupMenuButton(
                         icon: const Icon(Icons.filter_list),
+                        position: PopupMenuPosition.under,
                         itemBuilder: (context) {
                           return List.generate(
                             controller.regions.length,
                             (index) => PopupMenuItem(
+                                value: controller.regions[index],
                                 child: Text(controller.regions[index])),
                           );
                         },
+                        onSelected: (value) =>
+                            controller.filterCountryByRegion(value),
                       ),
                       SearchAnchor(
                         dividerColor: ColorConstant.blueDark_50,
                         isFullScreen: false,
                         searchController: searchController,
+                        viewBackgroundColor: ColorConstant.blueDark_50,
                         viewHintText: "search Country",
                         viewLeading: IconButton(
                             onPressed: () {
@@ -166,7 +172,10 @@ class HomeView extends GetView<HomeController> {
                                   leading: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: Hero(
-                                      tag: controller.allCountries.value[index],
+                                      key: Key(controller.allCountries
+                                          .value[index].name!.common
+                                          .toString()),
+                                      tag: controller.allCountries.value[index].name!.common!,
                                       child: CachedNetworkImage(
                                         width: 40,
                                         height: 40,

@@ -27,4 +27,14 @@ class ApiProvider extends GetConnect {
       return const Response(statusCode: 501, statusText: "error");
     }
   }
+
+  // get all countries BY REGION
+  Future<Response?> countriesByRegion(String name) async {
+    try {
+      final response = await get("${ApiEndpoints.filterRegion}/$name");
+      return response;
+    } catch (e) {
+      return const Response(statusCode: 501, statusText: "error");
+    }
+  }
 }

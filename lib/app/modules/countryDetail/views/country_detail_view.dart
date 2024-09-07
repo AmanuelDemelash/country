@@ -75,7 +75,8 @@ class CountryDetailView extends GetView<CountryDetailController> {
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20)),
                   child: Hero(
-                    tag: country,
+                    key: Key(country.name!.common.toString()),
+                    tag: country.name!.common!,
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
                       imageUrl: country.flags!.png!,
