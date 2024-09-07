@@ -1,3 +1,4 @@
+import 'package:country/app/data/models/country_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,16 +15,22 @@ class SettingView extends GetView<SettingController> {
           title: const Text('Setting'),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Obx(() => SwitchListTile.adaptive(
-                  value: controller.isDark.value,
-                  title: const Text("Theme(dark)"),
-                  onChanged: (value) {
-                    controller.changeTheme(value);
-                  },
-                ))
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Card(
+                elevation: 0,
+                child: Obx(() => SwitchListTile.adaptive(
+                      value: controller.isDark.value,
+                      title: const Text("Theme(dark)"),
+                      onChanged: (value) {
+                        controller.changeTheme(value);
+                      },
+                    )),
+              )
+            ],
+          ),
         ));
   }
 }

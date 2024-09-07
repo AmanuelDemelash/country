@@ -60,7 +60,6 @@ class HomeView extends GetView<HomeController> {
                         dividerColor: ColorConstant.blueDark_50,
                         isFullScreen: false,
                         searchController: searchController,
-                        viewBackgroundColor: ColorConstant.blueDark_50,
                         viewHintText: "search Country",
                         viewLeading: IconButton(
                             onPressed: () {

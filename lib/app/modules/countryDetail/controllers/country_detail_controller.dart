@@ -1,23 +1,29 @@
+import 'package:country/app/data/models/country_model.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 class CountryDetailController extends GetxController {
-  //TODO: Implement CountryDetailController
 
-  final count = 0.obs;
+  late Box _boxFavorite;
+  RxBool isFavorite=false.obs;
+
   @override
   void onInit() {
     super.onInit();
+    _boxFavorite=Hive.box('favorite');
+
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> addFavorite(Country country)async{
+     _boxFavorite.put(country.name!.common,{"name":country.name!.common,"flag":country.flags!.png!});
+     isFavorite.value=true;
   }
-
-  @override
-  void onClose() {
-    super.onClose();
+  Future<void> deleteFavorite(Country country)async{
+    _boxFavorite.delete(country.name!.common);
+    isFavorite.value=false;
   }
+  Future<void> checkFavorite(String name)async{
+     isFavorite.value=_boxFavorite.containsKey(name);
+ }
 
-  void increment() => count.value++;
 }
