@@ -31,7 +31,7 @@ class HomeView extends GetView<HomeController> {
                 },
               ),
               SearchAnchor(
-                dividerColor: ColorConstant.blue_50,
+                dividerColor: ColorConstant.blueDark_50,
                 isFullScreen: false,
                 searchController: searchController,
                 viewHintText: "search Country",

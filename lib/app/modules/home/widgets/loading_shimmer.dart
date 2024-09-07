@@ -14,7 +14,7 @@ class loadingShimmer extends StatelessWidget {
     return ListTile(
       leading:Shimmer.fromColors(
           baseColor: Colors.grey.withOpacity(0.5),
-          highlightColor: ColorConstant.blue_50,
+          highlightColor: ColorConstant.blueDark_50,
           child: Container(
             width: 60,
             height:80,
@@ -26,7 +26,7 @@ class loadingShimmer extends StatelessWidget {
       ),
       title: Shimmer.fromColors(
           baseColor: Colors.grey.withOpacity(0.5),
-          highlightColor: ColorConstant.blue_50,
+          highlightColor: ColorConstant.blueDark_50,
           child: Container(
             width: 50,
             height:8,
@@ -38,7 +38,7 @@ class loadingShimmer extends StatelessWidget {
       ),
       subtitle: Shimmer.fromColors(
           baseColor: Colors.grey.withOpacity(0.5),
-          highlightColor: ColorConstant.blue_50,
+          highlightColor: ColorConstant.blueDark_50,
           child: Container(
             width: 40,
             height:8,

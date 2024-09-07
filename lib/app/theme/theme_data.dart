@@ -13,7 +13,7 @@ ThemeData lightTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(20),
-          textStyle: const TextStyle(color: ColorConstant.blue_50))),
+          textStyle: const TextStyle(color: ColorConstant.blueDark_50))),
 
   visualDensity: VisualDensity.adaptivePlatformDensity,
   pageTransitionsTheme: const PageTransitionsTheme(builders: {
